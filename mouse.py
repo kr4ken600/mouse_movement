@@ -1,7 +1,8 @@
 from pynput.mouse import Controller
 from time import sleep
 from sys import argv
-import random, signal, sys, ctypes
+import random, signal, sys
+import tkinter as tk
 
 def handler(sig, frame):
     print("Cerrando aplicacion")
@@ -28,9 +29,10 @@ def getSeconds():
     return int(seconds) * 60;
 
 def getDimensions():
-    user32 = ctypes.windll.user32
-    user32.SetProcessDPIAware()
-    ancho, alto = int(user32.GetSystemMetrics(0)/2), int(user32.GetSystemMetrics(1)/2)
+    root = tk.Tk()
+    ancho = int(root.winfo_screenwidth() / 2)
+    alto = int(root.winfo_screenheight() / 2)
+    root.destroy()
     return [ancho, alto]
 
 if __name__ == "__main__":
